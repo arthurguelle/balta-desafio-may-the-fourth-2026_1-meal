@@ -1,0 +1,20 @@
+<Solution>
+  <Folder Name="/ai/">
+    <Project Path="ai/Meal.Ai/Meal.Ai.csproj" />
+  </Folder>
+  <Folder Name="/api/">
+    <Project Path="api/Meal.Api/Meal.Api.csproj" />
+  </Folder>
+  <Folder Name="/application/">
+    <Project Path="application/Meal.Application/Meal.Application.csproj" />
+  </Folder>
+  <Folder Name="/core/">
+    <Project Path="core/Meal.Core/Meal.Core.csproj" />
+  </Folder>
+  <Folder Name="/frontend/">
+    <Project Path="frontend/Meal.Frontend/Meal.Frontend.csproj" />
+  </Folder>
+  <Folder Name="/infra/">
+    <Project Path="infra/Meal.Infra/Meal.Infra.csproj" />
+  </Folder>
+</Solution>
