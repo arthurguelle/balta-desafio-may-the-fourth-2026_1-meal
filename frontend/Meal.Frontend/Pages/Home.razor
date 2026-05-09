@@ -1,7 +1,6 @@
 ﻿@page "/"
 @using System.Net.Http
 @using System.Net.Http.Json
-@using System.Text
 @using System.Text.Json
 @inject IHttpClientFactory HttpClientFactory
 
@@ -28,23 +27,8 @@
 		</div>
 
 		<div class="field">
-			<label for="pageContext">Conteudo da pagina para contexto</label>
-			<InputTextArea id="pageContext" @bind-Value="request.PageContext" class="mission-input" rows="4" />
-			<span class="field-hint">Cole aqui o texto da pagina que deseja considerar antes de enviar para a IA.</span>
-		</div>
-
-		<div class="field">
 			<label for="minutes">Tempo livre (minutos)</label>
 			<InputNumber id="minutes" @bind-Value="request.AvailableMinutes" class="mission-input" min="1" />
-		</div>
-
-		<div class="field">
-			<label for="finalPrompt">Prompt final editavel</label>
-			<InputTextArea id="finalPrompt" @bind-Value="request.FinalPrompt" class="mission-input" rows="7" />
-			<div class="inline-actions">
-				<button type="button" class="ghost-button" @onclick="GeneratePromptDraft">Gerar rascunho</button>
-				<span class="field-hint">Caracteres: @((request.FinalPrompt ?? string.Empty).Length)</span>
-			</div>
 		</div>
 
 		<button type="submit" class="launch-button" disabled="@isLoading">
@@ -70,9 +54,7 @@
 	private readonly SuggestRecipeRequest request = new()
 	{
 		Ingredients = "frango, arroz, tomate",
-		AvailableMinutes = 30,
-		PageContext = "",
-		FinalPrompt = ""
+		AvailableMinutes = 30
 	};
 
 	private bool isLoading;
@@ -109,14 +91,11 @@
 			return;
 		}
 
-		if (string.IsNullOrWhiteSpace(request.FinalPrompt) && string.IsNullOrWhiteSpace(request.Ingredients))
+		if (string.IsNullOrWhiteSpace(request.Ingredients))
 		{
-			errorMessage = "Informe ingredientes ou escreva o prompt final.";
+			errorMessage = "Informe os ingredientes disponiveis.";
 			return;
 		}
-
-		if (string.IsNullOrWhiteSpace(request.FinalPrompt))
-			request.FinalPrompt = BuildPromptDraft();
 
 		isLoading = true;
 		recipeSuggestion = null;
@@ -148,27 +127,6 @@
 		}
 	}
 
-	private void GeneratePromptDraft()
-	{
-		request.FinalPrompt = BuildPromptDraft();
-	}
-
-	private string BuildPromptDraft()
-	{
-		var builder = new StringBuilder();
-		builder.Append("Voce e um assistente culinario. Responda em portugues do Brasil, com receita objetiva, ingredientes e passos numerados. ");
-
-		if (!string.IsNullOrWhiteSpace(request.Ingredients))
-			builder.Append($"Ingredientes disponiveis: {request.Ingredients}. ");
-
-		builder.Append($"Tempo maximo de preparo: {request.AvailableMinutes} minutos. ");
-
-		if (!string.IsNullOrWhiteSpace(request.PageContext))
-			builder.Append($"Contexto da pagina: {request.PageContext}. ");
-
-		return builder.ToString().Trim();
-	}
-
 	private static string? TryReadProblemDetail(string raw)
 	{
 		try
@@ -189,8 +147,6 @@
 	{
 		public string? Ingredients { get; set; } = string.Empty;
 		public int AvailableMinutes { get; set; }
-		public string? PageContext { get; set; }
-		public string? FinalPrompt { get; set; }
 	}
 
 	private sealed record SuggestRecipeResponse(string Recipe);

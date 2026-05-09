@@ -3,12 +3,23 @@
 :root {
     --color-bg: #121315;
     --color-surface: #1f2022;
+    --color-surface-alt: #292a2c;
     --color-on-surface: #e3e2e4;
     --color-on-surface-variant: #c3c6ce;
     --color-outline-variant: #43474d;
     --color-secondary: #dac49c;
     --color-tertiary: #84dd15;
     --color-error: #ffb4ab;
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.5rem;
+    --space-6: 2rem;
+    --radius-none: 0;
+    --radius-pill: 999px;
+    --border-subtle: 1px solid var(--color-outline-variant);
+    --focus-ring: 0 0 0 2px rgba(132, 221, 21, 0.45);
 }
 
 html, body {
@@ -17,7 +28,8 @@ html, body {
         radial-gradient(circle at 85% 10%, rgba(132, 221, 21, 0.09), transparent 30%),
         var(--color-bg);
     color: var(--color-on-surface);
-    min-height: 100%;
+    min-height: 100vh;
+    line-height: 1.5;
 }
 
 body {
@@ -43,6 +55,8 @@ h1:focus {
 
 a, .btn-link {
     color: #b0c9ea;
+    text-decoration-color: rgba(176, 201, 234, 0.55);
+    text-underline-offset: 0.2rem;
 }
 
 .btn-primary {
@@ -51,17 +65,47 @@ a, .btn-link {
     border-color: #1861ac;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+.btn:focus-visible,
+.btn:active:focus-visible,
+.btn-link.nav-link:focus-visible,
+.form-control:focus-visible,
+.form-check-input:focus-visible,
+textarea:focus-visible,
+input:focus-visible,
+button:focus-visible,
+a:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
 }
 
 .content {
-    padding-top: 1.1rem;
+    padding-top: var(--space-4);
 }
 
 h1, h2, h3 {
     font-family: 'Space Grotesk', sans-serif;
     letter-spacing: 0.04em;
+    margin-top: 0;
+    color: var(--color-on-surface);
+}
+
+h1 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    line-height: 1.1;
+}
+
+h2 {
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    line-height: 1.2;
+}
+
+p {
+    margin: 0;
+    color: var(--color-on-surface-variant);
+}
+
+main {
+    min-width: 0;
 }
 
 .valid.modified:not([type=checkbox]) {
@@ -73,7 +117,7 @@ h1, h2, h3 {
 }
 
 .validation-message {
-    color: red;
+    color: var(--color-error);
 }
 
 #blazor-error-ui {

@@ -46,19 +46,14 @@ app.MapPost("/recipes/suggest", async (SuggestRecipeRequest request, IRecipeSugg
 	if (request.AvailableMinutes <= 0)
 		return Results.BadRequest(new { error = "AvailableMinutes deve ser maior que zero." });
 
-	var hasFinalPrompt = !string.IsNullOrWhiteSpace(request.FinalPrompt);
-	var hasIngredients = !string.IsNullOrWhiteSpace(request.Ingredients);
-
-	if (!hasFinalPrompt && !hasIngredients)
-		return Results.BadRequest(new { error = "Informe ingredientes ou um prompt final." });
+	if (string.IsNullOrWhiteSpace(request.Ingredients))
+		return Results.BadRequest(new { error = "Informe os ingredientes disponiveis." });
 
 	try
 	{
 		var suggestion = await aiClient.SuggestRecipeAsync(
-			ingredients: request.Ingredients ?? string.Empty,
+			ingredients: request.Ingredients,
 			availableMinutes: request.AvailableMinutes,
-			pageContext: request.PageContext,
-			finalPrompt: request.FinalPrompt,
 			cancellationToken: cancellationToken);
 		return Results.Ok(new { recipe = suggestion });
 	}
@@ -77,6 +72,4 @@ public sealed class SuggestRecipeRequest
 {
 	public string? Ingredients { get; init; }
 	public int AvailableMinutes { get; init; }
-	public string? PageContext { get; init; }
-	public string? FinalPrompt { get; init; }
 }

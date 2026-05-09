@@ -6,7 +6,5 @@ public interface IRecipeSuggestionClient
     Task<string> SuggestRecipeAsync(
         string ingredients,
         int availableMinutes,
-        string? pageContext = null,
-        string? finalPrompt = null,
         CancellationToken cancellationToken = default);
 }

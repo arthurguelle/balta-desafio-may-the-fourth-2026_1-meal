@@ -40,14 +40,12 @@ public sealed class OllamaRecipeSuggestionClient : IRecipeSuggestionClient
     public async Task<string> SuggestRecipeAsync(
         string ingredients,
         int availableMinutes,
-        string? pageContext = null,
-        string? finalPrompt = null,
         CancellationToken cancellationToken = default)
     {
         if (availableMinutes <= 0)
             throw new ArgumentOutOfRangeException(nameof(availableMinutes), "Tempo disponivel deve ser maior que zero.");
 
-        var prompt = BuildPrompt(ingredients, availableMinutes, pageContext, finalPrompt);
+        var prompt = BuildPrompt(ingredients, availableMinutes);
 
         var payload = new
         {
@@ -98,29 +96,15 @@ public sealed class OllamaRecipeSuggestionClient : IRecipeSuggestionClient
         throw new InvalidOperationException("Nao foi possivel obter uma sugestao da IA local apos as tentativas configuradas.");
     }
 
-    private static string BuildPrompt(string ingredients, int availableMinutes, string? pageContext, string? finalPrompt)
+    private static string BuildPrompt(string ingredients, int availableMinutes)
     {
-        if (!string.IsNullOrWhiteSpace(finalPrompt))
-            return finalPrompt.Trim();
-
         if (string.IsNullOrWhiteSpace(ingredients))
-            throw new ArgumentException("Ingredientes devem ser informados quando nenhum prompt final e enviado.", nameof(ingredients));
+            throw new ArgumentException("Ingredientes devem ser informados.", nameof(ingredients));
 
-        var prompt =
+        return
             "Voce e um assistente culinario. " +
             "Responda em portugues do Brasil com uma receita objetiva, use apenas os ingredientes listados, inclua ingredientes e passos numerados. " +
-            $"Ingredientes disponiveis: {ingredients}. " +
+            $"Ingredientes disponiveis: {ingredients.Trim()}. " +
             $"Tempo maximo de preparo: {availableMinutes} minutos.";
-
-        if (!string.IsNullOrWhiteSpace(pageContext))
-        {
-            var normalizedContext = pageContext.Trim();
-            if (normalizedContext.Length > 2000)
-                normalizedContext = normalizedContext[..2000];
-
-            prompt += $" Contexto adicional da pagina: {normalizedContext}.";
-        }
-
-        return prompt;
     }
 }
