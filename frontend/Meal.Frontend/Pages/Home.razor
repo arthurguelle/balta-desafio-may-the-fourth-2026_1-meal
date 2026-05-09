@@ -17,7 +17,6 @@
 		<span class="status-chip @(aiHealthy == true ? "ok" : "alert")">
 			@AiStatusLabel
 		</span>
-		<span class="status-tip">API: @ApiBaseUrl</span>
 	</div>
 
 	<EditForm Model="request" OnValidSubmit="SuggestRecipeAsync" class="mission-form">
@@ -61,7 +60,6 @@
 	private bool? aiHealthy;
 	private string? recipeSuggestion;
 	private string? errorMessage;
-	private string ApiBaseUrl { get; set; } = "-";
 
 	private string AiStatusLabel => aiHealthy == true
 		? "IA local online"
@@ -70,7 +68,6 @@
 	protected override async Task OnInitializedAsync()
 	{
 		var client = HttpClientFactory.CreateClient("MealApi");
-		ApiBaseUrl = client.BaseAddress?.ToString() ?? "-";
 
 		try
 		{

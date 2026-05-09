@@ -55,12 +55,6 @@
     box-shadow: 0 0 12px rgba(255, 180, 171, 0.2);
 }
 
-.status-tip {
-    font-size: 0.9rem;
-    color: var(--color-on-surface-variant);
-    align-self: center;
-}
-
 .mission-form {
     display: grid;
     gap: var(--space-4);
