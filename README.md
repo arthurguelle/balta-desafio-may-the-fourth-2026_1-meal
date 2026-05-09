@@ -2,9 +2,25 @@
 
 ## 🚀 May The Fourth 2026 - Desafio 1
 
-Oi, eu sou o [seu nome aqui] e este é o espaço onde compartilho minha jornada de aprendizado durante o desafio **May The Fourth 2026**, realizado pelo [balta.io](https://balta.io). 👻
+Oi, eu sou o Arthur Guelle e este é o espaço onde compartilho minha jornada de aprendizado durante o desafio **May The Fourth 2026**, realizado pelo [balta.io](https://balta.io). 👻
 
 Aqui você vai encontrar projetos, exercícios e códigos que estou desenvolvendo durante o desafio.
+
+## Normativas do Projeto
+As normas de trabalho, governança técnica e padrão de integração com IA local estão em:
+
+- [NORMATIVAS.md](NORMATIVAS.md)
+
+## Execucao Local Rapida
+Para subir API e Frontend com um comando:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/dev-up.ps1
+```
+
+URLs padrao:
+- API: http://localhost:5230
+- Frontend: http://localhost:5282
 
 ### Sobre este desafio
 Utilizar a IA cruza sua lista de ingredientes com o tempo livre na sua agenda (API) e sugerir receitas que se encaixam exatamente no buraco entre suas reuniões ou tarefas.

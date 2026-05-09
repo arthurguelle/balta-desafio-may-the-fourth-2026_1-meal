@@ -1,0 +1,42 @@
+# Reduce AI context/token usage
+
+# VCS and metadata
+.git/
+.gitignore
+
+# Build outputs
+**/bin/
+**/obj/
+**/dist/
+**/build/
+**/.next/
+**/.cache/
+
+# Package and tool caches
+**/node_modules/
+**/.nuget/
+**/.pnpm-store/
+
+# Logs and temp files
+**/*.log
+**/*.tmp
+**/*.temp
+**/.DS_Store
+
+# IDE/editor folders
+.vscode/
+.idea/
+
+# Runtime/secrets
+.env
+.env.*
+*.pfx
+*.snk
+
+# Large media and archives
+**/*.zip
+**/*.7z
+**/*.rar
+**/*.mp4
+**/*.mov
+**/*.psd

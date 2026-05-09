@@ -1,0 +1,158 @@
+.mission-shell {
+    border: 1px solid var(--color-secondary);
+    background: linear-gradient(160deg, rgba(15, 42, 68, 0.9) 0%, rgba(18, 19, 21, 0.97) 65%);
+    padding: var(--space-5);
+    clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
+}
+
+.mission-header h1 {
+    margin: 0.25rem 0 var(--space-2);
+    text-transform: uppercase;
+}
+
+.label {
+    margin: 0;
+    color: var(--color-secondary);
+    letter-spacing: 0.15em;
+    font-size: 0.72rem;
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 700;
+}
+
+.subtitle {
+    margin-top: var(--space-1);
+    color: var(--color-on-surface-variant);
+    max-width: 65ch;
+}
+
+.status-row {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-4);
+}
+
+.status-chip {
+    border: 1px solid;
+    padding: 0.35rem 0.8rem;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    font-family: "Space Grotesk", sans-serif;
+    border-radius: var(--radius-pill);
+}
+
+.status-chip.ok {
+    border-color: var(--color-tertiary);
+    color: var(--color-tertiary);
+    box-shadow: 0 0 12px rgba(132, 221, 21, 0.25);
+}
+
+.status-chip.alert {
+    border-color: var(--color-error);
+    color: var(--color-error);
+    box-shadow: 0 0 12px rgba(255, 180, 171, 0.2);
+}
+
+.mission-form {
+    display: grid;
+    gap: var(--space-4);
+}
+
+.field {
+    display: grid;
+    gap: var(--space-2);
+}
+
+.field label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-secondary);
+    font-family: "Space Grotesk", sans-serif;
+}
+
+.mission-input {
+    background: rgba(13, 14, 16, 0.9);
+    border: 1px solid var(--color-outline-variant);
+    color: var(--color-on-surface);
+    padding: var(--space-3);
+    border-radius: var(--radius-none);
+    line-height: 1.5;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.mission-input::placeholder {
+    color: rgba(195, 198, 206, 0.65);
+}
+
+.mission-input:focus-visible {
+    border-color: var(--color-tertiary);
+    box-shadow: var(--focus-ring);
+    outline: none;
+}
+
+.launch-button {
+    background: #a8342f;
+    border: 1px solid #f06258;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: "Space Grotesk", sans-serif;
+    padding: 0.8rem 1rem;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.launch-button:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+}
+
+.launch-button:hover:enabled {
+    box-shadow: 0 0 14px rgba(255, 106, 95, 0.45);
+    transform: translateY(-1px);
+}
+
+.launch-button:disabled {
+    opacity: 0.8;
+}
+
+.feedback {
+    margin-top: var(--space-4);
+    border: 1px solid var(--color-error);
+    padding: var(--space-3);
+    color: var(--color-error);
+    background: rgba(147, 0, 10, 0.25);
+}
+
+.recipe-output {
+    margin-top: var(--space-4);
+    border: 1px solid var(--color-secondary);
+    background: rgba(18, 19, 21, 0.9);
+    padding: var(--space-4);
+}
+
+.recipe-output h2 {
+    margin-top: 0;
+    text-transform: uppercase;
+    margin-bottom: var(--space-3);
+}
+
+.recipe-output pre {
+    margin: 0;
+    white-space: pre-wrap;
+    font-family: "Manrope", sans-serif;
+    line-height: 1.65;
+    color: var(--color-on-surface);
+}
+
+@media (max-width: 640px) {
+    .mission-shell {
+        padding: var(--space-4);
+    }
+
+    .launch-button {
+        width: 100%;
+    }
+}
